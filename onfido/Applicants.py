@@ -1,3 +1,5 @@
+from onfido import HttpClient, Applicant
+
 class Applicants(object):
 
     @classmethod

@@ -1,10 +1,15 @@
+from . import OnfidoObjectBase, HttpClient
+
 class Applicant(OnfidoObjectBase):
+
+    def get():
+        print(api_token)
 
     @classmethod
     def create(cls, options):
         options = json.dumps(options)
         applicant = HttpClient("POST", "/applicants", data=options)
-        return Applicant(applicant)
+        return cls(applicant)
 
     def check(self, type, reports):
         return Check.create(self.id, type, reports)
@@ -25,4 +30,4 @@ class Applicant(OnfidoObjectBase):
     @classmethod
     def retrieve(cls, applicant_id):
         applicant = HttpClient("GET", "/applicants/{0}".format(applicant_id))
-        return Applicant(applicant)
+        return cls(applicant)
