@@ -2,9 +2,6 @@ from . import OnfidoObjectBase, HttpClient
 
 class Applicant(OnfidoObjectBase):
 
-    def get():
-        print(api_token)
-
     @classmethod
     def create(cls, options):
         options = json.dumps(options)
