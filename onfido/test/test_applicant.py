@@ -1,5 +1,5 @@
 import httpretty
-from hamcrest import assert_that, equal_to, has_key, contains_inanyorder
+from hamcrest import assert_that, equal_to, has_key, contains_inanyorder, instance_of
 import onfido
 from .test_utils import load_fixture_string
 
@@ -15,6 +15,7 @@ class TestApplicants:
 							   body=load_fixture_string("applicant.json"),
 							   content_type="application/json")
 		response = onfido.Applicant.retrieve(applicant_id)
+		assert_that(response, instance_of(onfido.Applicant))
 		assert_that(response.id, equal_to("1030303-123123-123123"))
 		assert_that(response.created_at, equal_to("2014-05-23T13:50:33Z"))
 		assert_that(response.href, equal_to("/v1/applicants/1030303-123123-123123"))
