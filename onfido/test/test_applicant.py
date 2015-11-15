@@ -9,7 +9,7 @@ class TestApplicants:
 		onfido.api_token = "gjh5k3l4jhlk31jh4fl34"
 
 	@httpretty.activate
-	def test_load_an_applicant(self):
+	def test_retrieve_an_applicant(self):
 		applicant_id = "9g734m0hg73bf06"
 		httpretty.register_uri(httpretty.GET, "https://api.onfido.com/v1/applicants/{0}".format(applicant_id),
 							   body=load_fixture_string("applicant.json"),
