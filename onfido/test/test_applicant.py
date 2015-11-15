@@ -67,3 +67,59 @@ class TestApplicants:
 				"end_date": "2012-12-31"
 			}
 		))
+
+	@httpretty.activate
+	def test_create_an_applicant(self):
+		applicant_id = "9g734m0hg73bf06"
+		httpretty.register_uri(httpretty.POST, "https://api.onfido.com/v1/applicants",
+							   body=load_fixture_string("new_applicant.json"),
+							   content_type="application/json")
+		new_applicant_data = {
+			"title": "Mr",
+			"first_name": "John",
+			"middle_name": None,
+			"last_name": "Smith",
+			"gender": "male",
+			"dob": "1987-02-17",
+			"telephone": "0892337217",
+			"mobile": None,
+			"country": "GBR",
+			"addresses": [
+				{
+					"flat_number": 1,
+					"building_name": None,
+					"building_number": None,
+					"street": "Some street",
+					"sub_street": None,
+					"state": None,
+					"town": "London",
+					"postcode": "NW3 5HF",
+					"country": "GBR",
+					"start_date": "2013-01-01",
+					"end_date": None
+				}
+			]
+		}
+		new_applicant = onfido.Applicant.create(new_applicant_data)
+		assert_that(new_applicant.title, equal_to("Mr"))
+		assert_that(new_applicant.first_name, equal_to("John"))
+		assert_that(new_applicant.middle_name, equal_to(None))
+		assert_that(new_applicant.last_name, equal_to("Smith"))
+		assert_that(new_applicant.gender, equal_to("male"))
+		assert_that(new_applicant.dob, equal_to("1987-02-17"))
+		assert_that(new_applicant.telephone, equal_to("0892337217"))
+		assert_that(new_applicant.mobile, equal_to(None))
+		assert_that(new_applicant.country, equal_to("GBR"))
+		assert_that(new_applicant.addresses, contains_inanyorder({
+			"flat_number": 1,
+			"building_name": None,
+			"building_number": None,
+			"street": "Some street",
+			"sub_street": None,
+			"state": None,
+			"town": "London",
+			"postcode": "NW3 5HF",
+			"country": "GBR",
+			"start_date": "2013-01-01",
+			"end_date": None
+		}))

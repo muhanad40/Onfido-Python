@@ -1,4 +1,5 @@
 from . import OnfidoObjectBase, HttpClient
+import json
 
 class Applicant(OnfidoObjectBase):
 
