@@ -1,4 +1,4 @@
 httpretty==0.8.10
 pytest==2.8.2
 PyHamcrest==1.8.5
-ipython==4.0.0
+ipython==7.16.3
